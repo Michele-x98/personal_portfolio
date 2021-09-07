@@ -19,20 +19,22 @@ class Content extends StatelessWidget {
           itemCount: sections.length,
           itemScrollController: gx.scrollController,
           itemBuilder: (context, index) => sections[index],
+          initialScrollIndex: 0,
+          // itemPositionsListener: gx.itemPositionsListener,
         ),
-        isMobile
-            ? Positioned(
-                bottom: 0,
-                // left: 0,
-                right: 30,
-                child: CustomAppBar(),
-              )
-            : Positioned(
-                top: 0,
-                // left: 0,
-                // right: 0,
-                child: CustomAppBar(),
-              )
+        // isMobile
+        //     ? Positioned(
+        //         bottom: 0,
+        //         // left: 0,
+        //         right: 30,
+        //         child: CustomAppBar(),
+        //       )
+        //     : Positioned(
+        //         top: 0,
+        //         // left: 0,
+        //         // right: 0,
+        //         child: CustomAppBar(),
+        //       ),
       ],
     );
   }

@@ -9,53 +9,54 @@ class Skills extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isMobile = Get.width < 600;
-    return Column(
-      children: [
-        SizedBox(height: isMobile ? 100 : 200),
-        Text(
-          'SKILLS',
-          style: GoogleFonts.robotoMono(
-            color: Colors.white,
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
-            wordSpacing: 25,
-            letterSpacing: 5,
+    return FittedBox(
+      child: Column(
+        children: [
+          Text(
+            'SKILLS',
+            style: GoogleFonts.robotoMono(
+              color: Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.w500,
+              wordSpacing: 25,
+              letterSpacing: 5,
+            ),
           ),
-        ),
-        SizedBox(
-          height: isMobile ? 50 : 100,
-        ),
-        Container(
-          width: Get.width * 0.80,
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: Wrap(
-            alignment: WrapAlignment.center,
-            spacing: isMobile ? 25 : 50,
-            runSpacing: isMobile ? 25 : 50,
-            children: cardSkills(isMobile),
-            // Container(
-            //   height: 200,
-            //   width: MediaQuery.of(context).size.width,
-            //   child: ListView.builder(
-            //     scrollDirection: Axis.horizontal,
-            //     itemCount: skills.length,
-            //     itemBuilder: (context, index) => Container(
-            //       height: MediaQuery.of(context).size.width * 0.2,
-            //       width: MediaQuery.of(context).size.width * 0.2,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(50),
-            //         color: Colors.pink,
-            //       ),
-            //       child: Icon(
-            //         skills[index],
-            //         size: 80,
-            //       ),
-            //     ),
-            //   ),
-            // ),
+          SizedBox(
+            height: isMobile ? 50 : 100,
           ),
-        )
-      ],
+          Container(
+            width: Get.width * 0.80,
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: isMobile ? 25 : 50,
+              runSpacing: isMobile ? 25 : 50,
+              children: cardSkills(isMobile),
+              // Container(
+              //   height: 200,
+              //   width: MediaQuery.of(context).size.width,
+              //   child: ListView.builder(
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: skills.length,
+              //     itemBuilder: (context, index) => Container(
+              //       height: MediaQuery.of(context).size.width * 0.2,
+              //       width: MediaQuery.of(context).size.width * 0.2,
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(50),
+              //         color: Colors.pink,
+              //       ),
+              //       child: Icon(
+              //         skills[index],
+              //         size: 80,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
