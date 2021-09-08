@@ -6,7 +6,7 @@ import 'package:simple_icons/simple_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GlobalController extends GetxController {
-  final pageController = new PageController(initialPage: 1);
+  final pageController = new PageController(initialPage: 0);
   final scrollController = new ItemScrollController();
   final itemPositionsListener = new ItemPositionsListener.create();
   var currentIndex = 0.obs;
@@ -64,35 +64,17 @@ class GlobalController extends GetxController {
   ];
 
   List<Widget> circle(double radius, double iconSize) {
+    print("radius: $radius , iconSize: $iconSize");
     List<Widget> temp = [];
     contacts.forEach((element) {
       temp.add(
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GestureDetector(
-            onTap: element['fun'],
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(radius),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 5,
-                    color: Colors.black45,
-                    spreadRadius: 0,
-                    offset: Offset(5, 5),
-                  )
-                ],
-              ),
-              child: CircleAvatar(
-                maxRadius: radius,
-                backgroundColor: Colors.grey[800],
-                child: Icon(
-                  element['icon'],
-                  size: iconSize,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+          child: IconButton(
+            icon: Icon(element['icon']),
+            iconSize: iconSize,
+            onPressed: element['fun'],
+            color: Colors.white,
           ),
         ),
       );

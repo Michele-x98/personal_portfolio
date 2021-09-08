@@ -74,8 +74,8 @@ class DesktopAbout extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'me.jpeg',
+                  child: Image.network(
+                    'https://i.postimg.cc/zvg3xXHC/me.jpg',
                     fit: BoxFit.fitWidth,
                     // scale: 2.2,
                   ),
@@ -129,7 +129,7 @@ class MobileAbout extends StatelessWidget {
               wordSpacing: 3,
               letterSpacing: 3,
             ),
-            minFontSize: 14,
+            minFontSize: 2,
           ),
         ),
         Padding(
@@ -149,8 +149,8 @@ class MobileAbout extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                'me.jpeg',
+              child: Image.network(
+                'https://i.postimg.cc/zvg3xXHC/me.jpg',
                 fit: BoxFit.fitHeight,
                 // scale: 2.2,
               ),

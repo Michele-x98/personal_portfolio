@@ -44,17 +44,17 @@ class MyApp extends StatelessWidget {
                 child: CustomAppBar(),
                 alignment: Alignment.bottomRight,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Builder(
-                    builder: (context) => Text(
-                      '${MediaQuery.of(context).size.width} * ${MediaQuery.of(context).size.height}',
-                    ),
-                  ),
-                ),
-              )
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Align(
+              //     alignment: Alignment.bottomRight,
+              //     child: Builder(
+              //       builder: (context) => Text(
+              //         '${MediaQuery.of(context).size.width} * ${MediaQuery.of(context).size.height}',
+              //       ),
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

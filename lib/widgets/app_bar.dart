@@ -233,7 +233,7 @@ class DesktopAppBar extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 12.0, bottom: 12),
                 child: Image.asset(
-                  'develop.png',
+                  'assets/develop.png',
                 ),
               )
             ],
