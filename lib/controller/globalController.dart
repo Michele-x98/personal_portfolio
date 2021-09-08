@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mailto/mailto.dart';
+import 'package:personal_portfolio/widgets/onHover.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -71,11 +72,14 @@ class GlobalController extends GetxController {
         temp.add(
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              icon: Icon(element['icon']),
-              iconSize: iconSize,
-              onPressed: element['fun'],
-              color: Colors.white,
+            child: OnHover(
+              scale: 1.4,
+              builder: (val) => IconButton(
+                icon: Icon(element['icon']),
+                iconSize: iconSize,
+                onPressed: element['fun'],
+                color: val ? Colors.lightBlue : Colors.white,
+              ),
             ),
           ),
         );
@@ -87,7 +91,9 @@ class GlobalController extends GetxController {
   List<Widget> cardSkills(double iconSize, double radius) {
     List<Widget> list = [];
     skills.forEach((element) {
-      Container container = Container(
+      OnHover container = OnHover(
+        scale: 1.1,
+        builder: (val) => Container(
           height: radius,
           width: radius,
           decoration: BoxDecoration(
@@ -105,7 +111,10 @@ class GlobalController extends GetxController {
           child: Icon(
             element,
             size: iconSize,
-          ));
+            color: val ? Colors.lightBlue : Colors.white,
+          ),
+        ),
+      );
       list.add(container);
     });
     return list;
@@ -132,5 +141,7 @@ class GlobalController extends GetxController {
     SimpleIcons.mysql,
     SimpleIcons.git,
     SimpleIcons.junit5,
+    SimpleIcons.visualstudiocode,
+    SimpleIcons.postman,
   ];
 }

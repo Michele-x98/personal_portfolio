@@ -12,15 +12,30 @@ class AboutMe extends StatelessWidget {
     return Container(
       height: Get.height,
       width: Get.width,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 600) {
-            //desktop
-            return DesktopAbout();
-          } else {
-            return MobileAbout();
-          }
-        },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            'ABOUT ME',
+            style: GoogleFonts.robotoMono(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              wordSpacing: 10,
+              letterSpacing: 5,
+            ),
+          ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 600) {
+                //desktop
+                return DesktopAbout();
+              } else {
+                return MobileAbout();
+              }
+            },
+          ),
+        ],
       ),
     );
   }
@@ -29,61 +44,49 @@ class AboutMe extends StatelessWidget {
 class DesktopAbout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(
-          'ABOUT ME',
-          style: GoogleFonts.robotoMono(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            wordSpacing: 10,
-            letterSpacing: 5,
+        Container(
+          width: Get.width * 0.50,
+          height: Get.height * 0.5,
+          alignment: AlignmentDirectional.center,
+          child: AutoSizeText(
+            text,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.robotoMono(
+              color: Colors.white,
+              wordSpacing: 3,
+              letterSpacing: 3,
+            ),
+            minFontSize: 6,
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              width: Get.width * 0.50,
-              child: AutoSizeText(
-                text,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.robotoMono(
-                  color: Colors.white,
-                  wordSpacing: 3,
-                  letterSpacing: 3,
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            alignment: AlignmentDirectional.center,
+            width: Get.width * 0.2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 5,
+                  color: Colors.black45,
+                  spreadRadius: 0,
+                  offset: Offset(5, 5),
                 ),
-                minFontSize: 6,
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                'https://i.postimg.cc/zvg3xXHC/me.jpg',
+                fit: BoxFit.fitWidth,
+                // scale: 2.2,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                width: Get.width * 0.2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 5,
-                      color: Colors.black45,
-                      spreadRadius: 0,
-                      offset: Offset(5, 5),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    'https://i.postimg.cc/zvg3xXHC/me.jpg',
-                    fit: BoxFit.fitWidth,
-                    // scale: 2.2,
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );
@@ -106,22 +109,12 @@ class MobileAbout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          'ABOUT ME',
-          style: GoogleFonts.robotoMono(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            wordSpacing: 10,
-            letterSpacing: 5,
-          ),
-        ),
         Container(
           height: Get.height * 0.50,
-          margin: EdgeInsets.only(left: 12, right: 12),
-          alignment: Alignment.center,
+          width: Get.width * 0.9,
+          alignment: AlignmentDirectional.center,
           child: AutoSizeText(
             text,
             textAlign: TextAlign.center,
@@ -132,6 +125,9 @@ class MobileAbout extends StatelessWidget {
             ),
             minFontSize: 2,
           ),
+        ),
+        SizedBox(
+          width: Get.width * 0.07,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

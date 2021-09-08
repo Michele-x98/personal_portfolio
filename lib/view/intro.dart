@@ -77,47 +77,55 @@ class ResponsiveIntro extends StatelessWidget {
         DelayedDisplay(
           fadingDuration: Duration(seconds: 2),
           delay: Duration(milliseconds: 500),
+          slidingCurve: Curves.linear,
           child: Image.asset(
             'assets/develop.png',
             height: radius == 30 ? Get.height * 0.2 : Get.width * 0.4,
           ),
         ),
         DelayedDisplay(
-          fadingDuration: Duration(seconds: 2),
+          fadingDuration: Duration(milliseconds: 1000),
           delay: Duration(milliseconds: 1000),
+          slidingBeginOffset: Offset(-1, 0),
+          slidingCurve: Curves.linear,
           child: Padding(
             padding: const EdgeInsets.only(left: 22, right: 22),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'Hello, I am ',
-                  style:
-                      GoogleFonts.robotoMono(fontSize: 25, color: Colors.white),
-                  children: [
-                    TextSpan(
-                      text: 'Michele Benedetti\n',
-                      style: GoogleFonts.robotoMono(
-                        fontSize: 30,
-                        color: Colors.lightBlue,
+            child: Container(
+              width: Get.width * 0.8,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'Hello, I am ',
+                    style: GoogleFonts.robotoMono(
+                        fontSize: 25, color: Colors.white),
+                    children: [
+                      TextSpan(
+                        text: 'Michele Benedetti\n',
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 30,
+                          color: Colors.lightBlue,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: "I'm a Software & Front-end Developer in Flutter",
-                      style: GoogleFonts.robotoMono(
-                        fontSize: 25,
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
+                      TextSpan(
+                        text: "I'm a Software & Front-end Developer in Flutter",
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
         DelayedDisplay(
-          fadingDuration: Duration(seconds: 2),
+          fadingDuration: Duration(seconds: 1),
+          slidingCurve: Curves.linear,
+          slidingBeginOffset: Offset(10, 0),
           delay: Duration(milliseconds: 1500),
           child: FittedBox(
             alignment: AlignmentDirectional.center,

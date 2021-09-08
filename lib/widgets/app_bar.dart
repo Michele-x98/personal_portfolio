@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio/controller/globalController.dart';
+import 'package:personal_portfolio/widgets/onHover.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -184,21 +185,29 @@ class DesktopAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TextButton(
-                child: Text(
-                  'HOME',
-                  style: GoogleFonts.robotoMono(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                child: OnHover(
+                  scale: 1.1,
+                  duration: Duration(milliseconds: 100),
+                  builder: (isHover) => Text(
+                    'HOME',
+                    style: GoogleFonts.robotoMono(
+                      color: isHover ? Colors.lightBlue : Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 onPressed: () => gx.animateToIndex(0),
               ),
               TextButton(
-                child: Text(
-                  'ABOUT',
-                  style: GoogleFonts.robotoMono(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                child: OnHover(
+                  scale: 1.1,
+                  duration: Duration(milliseconds: 100),
+                  builder: (isHover) => Text(
+                    'ABOUT',
+                    style: GoogleFonts.robotoMono(
+                      color: isHover ? Colors.lightBlue : Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 onPressed: () => gx.animateToIndex(1),
@@ -206,11 +215,15 @@ class DesktopAppBar extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
-                  child: Text(
-                    'SKILLS',
-                    style: GoogleFonts.robotoMono(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
+                  child: OnHover(
+                    scale: 1.1,
+                    duration: Duration(milliseconds: 100),
+                    builder: (isHover) => Text(
+                      'SKILLS',
+                      style: GoogleFonts.robotoMono(
+                        color: isHover ? Colors.lightBlue : Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   onPressed: () => gx.animateToIndex(2),
@@ -219,11 +232,15 @@ class DesktopAppBar extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 12.0),
                 child: TextButton(
-                  child: Text(
-                    'PROJECTS',
-                    style: GoogleFonts.robotoMono(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
+                  child: OnHover(
+                    scale: 1.1,
+                    duration: Duration(milliseconds: 100),
+                    builder: (isHover) => Text(
+                      'PROJECTS',
+                      style: GoogleFonts.robotoMono(
+                        color: isHover ? Colors.lightBlue : Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   onPressed: () => gx.animateToIndex(3),
