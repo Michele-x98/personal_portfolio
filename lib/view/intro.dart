@@ -1,8 +1,10 @@
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio/controller/globalController.dart';
+import 'package:personal_portfolio/widgets/app_bar.dart';
 
 class Intro extends StatelessWidget {
   const Intro({Key? key}) : super(key: key);
@@ -72,45 +74,57 @@ class ResponsiveIntro extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          'assets/develop.png',
-          height: radius == 30 ? Get.height * 0.2 : Get.width * 0.4,
+        DelayedDisplay(
+          fadingDuration: Duration(seconds: 2),
+          delay: Duration(milliseconds: 500),
+          child: Image.asset(
+            'assets/develop.png',
+            height: radius == 30 ? Get.height * 0.2 : Get.width * 0.4,
+          ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 22, right: 22),
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Hello, I am ',
-                style:
-                    GoogleFonts.robotoMono(fontSize: 25, color: Colors.white),
-                children: [
-                  TextSpan(
-                    text: 'Michele Benedetti\n',
-                    style: GoogleFonts.robotoMono(
-                      fontSize: 30,
-                      color: Colors.lightBlue,
+        DelayedDisplay(
+          fadingDuration: Duration(seconds: 2),
+          delay: Duration(milliseconds: 1000),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 22, right: 22),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Hello, I am ',
+                  style:
+                      GoogleFonts.robotoMono(fontSize: 25, color: Colors.white),
+                  children: [
+                    TextSpan(
+                      text: 'Michele Benedetti\n',
+                      style: GoogleFonts.robotoMono(
+                        fontSize: 30,
+                        color: Colors.lightBlue,
+                      ),
                     ),
-                  ),
-                  TextSpan(
-                    text: "I'm a Software & Front-end Developer in Flutter",
-                    style: GoogleFonts.robotoMono(
-                      fontSize: 25,
-                      color: Colors.white,
-                    ),
-                  )
-                ],
+                    TextSpan(
+                      text: "I'm a Software & Front-end Developer in Flutter",
+                      style: GoogleFonts.robotoMono(
+                        fontSize: 25,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ),
-        FittedBox(
-          alignment: AlignmentDirectional.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: contact,
+        DelayedDisplay(
+          fadingDuration: Duration(seconds: 2),
+          delay: Duration(milliseconds: 1500),
+          child: FittedBox(
+            alignment: AlignmentDirectional.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: contact,
+            ),
           ),
         ),
       ],

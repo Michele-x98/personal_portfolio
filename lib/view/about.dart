@@ -9,22 +9,24 @@ class AboutMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth > 600) {
-          //desktop
-          return DesktopAbout();
-        } else {
-          return MobileAbout();
-        }
-      },
+    return Container(
+      height: Get.height,
+      width: Get.width,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 600) {
+            //desktop
+            return DesktopAbout();
+          } else {
+            return MobileAbout();
+          }
+        },
+      ),
     );
   }
 }
 
 class DesktopAbout extends StatelessWidget {
-  const DesktopAbout({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -50,11 +52,10 @@ class DesktopAbout extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.robotoMono(
                   color: Colors.white,
-                  // fontSize: 16,
                   wordSpacing: 3,
                   letterSpacing: 3,
                 ),
-                minFontSize: 14,
+                minFontSize: 6,
               ),
             ),
             Padding(
@@ -89,7 +90,7 @@ class DesktopAbout extends StatelessWidget {
   }
 }
 
-const String text = "Hi there, i'm Michele Benedetti " +
+const String text = "Hi there, i'm Michele Benedetti." +
     "\n\n\n" +
     "I'm a Master Student at University of Camerino in Computer Science. " +
     "\n\n\n" +
@@ -97,7 +98,7 @@ const String text = "Hi there, i'm Michele Benedetti " +
     "\n\n\n" +
     "Passionate about Automotive, V-Cars and JDM. " +
     "\n\n\n" +
-    "I love Apple's design and ecosystem, and I'm a fan of rounded corners ";
+    "I love Apple's design and ecosystem, and I'm a fan of rounded corners.";
 
 class MobileAbout extends StatelessWidget {
   const MobileAbout({Key? key}) : super(key: key);

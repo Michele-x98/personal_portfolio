@@ -66,19 +66,71 @@ class GlobalController extends GetxController {
   List<Widget> circle(double radius, double iconSize) {
     print("radius: $radius , iconSize: $iconSize");
     List<Widget> temp = [];
-    contacts.forEach((element) {
-      temp.add(
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(
-            icon: Icon(element['icon']),
-            iconSize: iconSize,
-            onPressed: element['fun'],
-            color: Colors.white,
+    contacts.forEach(
+      (element) {
+        temp.add(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: Icon(element['icon']),
+              iconSize: iconSize,
+              onPressed: element['fun'],
+              color: Colors.white,
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
     return temp;
   }
+
+  List<Widget> cardSkills(double iconSize, double radius) {
+    List<Widget> list = [];
+    skills.forEach((element) {
+      Container container = Container(
+          height: radius,
+          width: radius,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            color: Colors.grey[800],
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 5,
+                color: Colors.black45,
+                spreadRadius: 0,
+                offset: Offset(5, 5),
+              )
+            ],
+          ),
+          child: Icon(
+            element,
+            size: iconSize,
+          ));
+      list.add(container);
+    });
+    return list;
+  }
+
+  final List<IconData> skills = [
+    SimpleIcons.flutter,
+    SimpleIcons.firebase,
+    SimpleIcons.dart,
+    SimpleIcons.csharp,
+    SimpleIcons.c,
+    SimpleIcons.java,
+    SimpleIcons.angular,
+    SimpleIcons.typescript,
+    SimpleIcons.npm,
+    SimpleIcons.html5,
+    SimpleIcons.css3,
+    SimpleIcons.wordpress,
+    SimpleIcons.woocommerce,
+    SimpleIcons.vsco,
+    SimpleIcons.nodedotjs,
+    SimpleIcons.springboot,
+    SimpleIcons.mongodb,
+    SimpleIcons.mysql,
+    SimpleIcons.git,
+    SimpleIcons.junit5,
+  ];
 }
