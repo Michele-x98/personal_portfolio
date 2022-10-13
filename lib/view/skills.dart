@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:personal_portfolio/controller/globalController.dart';
+import 'package:personal_portfolio/extension.dart';
+
+import '../controller/globalController.dart';
 
 class Skills extends StatelessWidget {
   Skills({Key? key}) : super(key: key);
@@ -10,8 +11,8 @@ class Skills extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width,
-      height: Get.height,
+      width: context.width,
+      height: context.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -47,27 +48,27 @@ class DesktopSkills extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gx = Get.find<GlobalController>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: Get.width * 0.4,
-          height: Get.height * 0.5,
+          width: context.width * 0.4,
+          height: context.height * 0.5,
           alignment: AlignmentDirectional.center,
           child: Wrap(
             alignment: WrapAlignment.center,
             spacing: 20,
             runSpacing: 20,
-            children: gx.cardSkills(Get.width * 0.02, Get.width * 0.05),
+            children:
+                cardSkills(skills, context.width * 0.02, context.width * 0.05),
           ),
         ),
         SizedBox(
-          width: Get.width * 0.07,
+          width: context.width * 0.07,
         ),
         Container(
-          width: Get.width * 0.4,
-          height: Get.height * 0.5,
+          width: context.width * 0.4,
+          height: context.height * 0.5,
           alignment: AlignmentDirectional.center,
           child: AutoSizeText(
             "Here you can find some of the knowledge gained over the years.\n\n\nThanks to the course of study and self-made projects, I was able to put my hand and test various languages ​​and frameworks, as well as different types of databases and CMS.\n\n\nIf you have any questions about any skills you see present, you are free to contact me to ask and talk to them together.",
@@ -91,13 +92,12 @@ class MobileSkills extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gx = Get.find<GlobalController>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: Get.width * 0.9,
-          height: Get.height * 0.4,
+          width: context.width * 0.9,
+          height: context.height * 0.4,
           alignment: AlignmentDirectional.center,
           child: AutoSizeText(
             "Here you can find some of the knowledge gained over the years.\n\n\nThanks to the course of study and self-made projects, I was able to put my hand and test various languages ​​and frameworks, as well as different types of databases and CMS.\n\n\nIf you have any questions about any skills you see present, you are free to contact me to ask and talk to them together.",
@@ -111,17 +111,18 @@ class MobileSkills extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: Get.width * 0.07,
+          width: context.width * 0.07,
         ),
         Container(
-          width: Get.width * 0.9,
-          height: Get.height * 0.4,
+          width: context.width * 0.9,
+          height: context.height * 0.4,
           alignment: AlignmentDirectional.center,
           child: Wrap(
             alignment: WrapAlignment.center,
             spacing: 20,
             runSpacing: 20,
-            children: gx.cardSkills(Get.height * 0.02, Get.height * 0.05),
+            children: cardSkills(
+                skills, context.height * 0.02, context.height * 0.05),
           ),
         ),
       ],

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:personal_portfolio/extension.dart';
 
 class Projects extends StatelessWidget {
   const Projects({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool isMobile = Get.width < 600;
+    bool isMobile = context.width < 600;
     return Column(
       children: [
         SizedBox(
@@ -35,12 +35,10 @@ class Projects extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: SizedBox(
-                height: isMobile ? Get.width * 0.8 : 700,
-                width: isMobile ? Get.width * 0.8 : 700,
+                height: isMobile ? context.width * 0.8 : 700,
+                width: isMobile ? context.width * 0.8 : 700,
                 child: Column(
                   children: [
-                    // Text('EnjoySalad Mobile App'),
-                    // Image.network('src'),
                     IconButton(
                       onPressed: () {},
                       icon: Icon(

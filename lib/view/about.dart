@@ -1,8 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:personal_portfolio/extension.dart';
 
 class AboutMe extends StatelessWidget {
   const AboutMe({Key? key}) : super(key: key);
@@ -10,8 +9,8 @@ class AboutMe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height,
-      width: Get.width,
+      height: context.height,
+      width: context.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -48,8 +47,8 @@ class DesktopAbout extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          width: Get.width * 0.50,
-          height: Get.height * 0.5,
+          width: context.width * 0.50,
+          height: context.height * 0.5,
           alignment: AlignmentDirectional.center,
           child: AutoSizeText(
             text,
@@ -66,7 +65,7 @@ class DesktopAbout extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Container(
             alignment: AlignmentDirectional.center,
-            width: Get.width * 0.2,
+            width: context.width * 0.2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
@@ -108,12 +107,14 @@ class MobileAbout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          height: Get.height * 0.50,
-          width: Get.width * 0.9,
+          height: height * 0.50,
+          width: width * 0.9,
           alignment: AlignmentDirectional.center,
           child: AutoSizeText(
             text,
@@ -127,12 +128,12 @@ class MobileAbout extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: Get.width * 0.07,
+          width: width * 0.07,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            height: Get.height * 0.3,
+            height: height * 0.3,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
