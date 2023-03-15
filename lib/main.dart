@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lit_starfield/view/lit_starfield_container.dart';
@@ -27,7 +29,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gx = ref.watch(globalController);
+    final controller = ref.watch(globalController);
+
     return Scaffold(
       extendBody: true,
       body: Stack(
@@ -37,29 +40,19 @@ class HomePage extends ConsumerWidget {
             allowImplicitScrolling: true,
             pageSnapping: false,
             scrollDirection: Axis.vertical,
-            controller: gx.pageController,
-            onPageChanged: gx.updateIndex,
+            controller: controller.pageController,
+            onPageChanged: controller.updateIndex,
             children: [
               Intro(),
               AboutMe(),
               Skills(),
+              Container(),
             ],
           ),
           Align(
             child: CustomAppBar(),
             alignment: Alignment.bottomRight,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Align(
-          //     alignment: Alignment.bottomRight,
-          //     child: Builder(
-          //       builder: (context) => Text(
-          //         '${MediaQuery.of(context).size.width} * ${MediaQuery.of(context).size.height}',
-          //       ),
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

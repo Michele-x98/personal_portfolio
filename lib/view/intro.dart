@@ -1,5 +1,5 @@
-import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio/controller/globalController.dart';
@@ -17,17 +17,12 @@ class Intro extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           LayoutBuilder(
-            builder: (context, constraints) {
-              return constraints.maxWidth > 600
-                  ? ResponsiveIntro(
-                      radius: 30,
-                      iconSize: 25,
-                    )
-                  : ResponsiveIntro(
-                      radius: constraints.maxWidth * 0.05,
-                      iconSize: constraints.maxWidth * 0.04,
-                    );
-            },
+            builder: (context, constraints) => ResponsiveIntro(
+              radius:
+                  constraints.maxWidth > 600 ? 30 : constraints.maxWidth * 0.05,
+              iconSize:
+                  constraints.maxWidth > 600 ? 25 : constraints.maxWidth * 0.04,
+            ),
           ),
           Positioned(
             bottom: 0.0,
@@ -49,7 +44,14 @@ class Intro extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          )
+              .animate(
+                onPlay: (controller) => controller.repeat(),
+              )
+              .fadeIn()
+              .slideY(duration: 800.ms, curve: Curves.easeOut)
+              .then()
+              .fadeOut()
         ],
       ),
     );
@@ -70,69 +72,60 @@ class ResponsiveIntro extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        DelayedDisplay(
-          fadingDuration: Duration(seconds: 2),
-          delay: Duration(milliseconds: 500),
-          slidingCurve: Curves.linear,
-          child: Image.asset(
-            'assets/develop.png',
-            height: radius == 30 ? context.height * 0.25 : context.width * 0.4,
-          ),
-        ),
+        Image.asset(
+          'assets/develop.png',
+          height: radius == 30 ? context.height * 0.25 : context.width * 0.4,
+        )
+            .animate(delay: 500.ms)
+            .fadeIn(duration: 1.seconds, curve: Curves.easeOut)
+            .slideY(duration: 1.seconds, curve: Curves.easeOut),
         const SizedBox(height: 24),
-        DelayedDisplay(
-          fadingDuration: Duration(milliseconds: 1000),
-          delay: Duration(milliseconds: 1000),
-          slidingBeginOffset: Offset(-1, 0),
-          slidingCurve: Curves.linear,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 22, right: 22),
-            child: Container(
-              width: context.width * 0.8,
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: 'Hello, I am ',
-                    style: GoogleFonts.robotoMono(
-                        fontSize: 25, color: Colors.white),
-                    children: [
-                      TextSpan(
-                        text: 'Michele Benedetti\n',
-                        style: GoogleFonts.robotoMono(
-                          fontSize: 30,
-                          color: Colors.lightBlue,
-                        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 22, right: 22),
+          child: Container(
+            width: context.width * 0.8,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Hello, I am ',
+                  style:
+                      GoogleFonts.robotoMono(fontSize: 25, color: Colors.white),
+                  children: [
+                    TextSpan(
+                      text: 'Michele Benedetti\n',
+                      style: GoogleFonts.robotoMono(
+                        fontSize: 30,
+                        color: Colors.lightBlue,
                       ),
-                      TextSpan(
-                        text: "I'm a Software & Front-end Developer in Flutter",
-                        style: GoogleFonts.robotoMono(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    TextSpan(
+                      text: "I'm a Software & Front-end Developer in Flutter",
+                      style: GoogleFonts.robotoMono(
+                        fontSize: 25,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
           ),
-        ),
+        )
+            .animate(delay: 1.seconds)
+            .fadeIn(duration: 1.seconds, curve: Curves.easeOut)
+            .slideX(duration: 1.seconds, curve: Curves.easeOut),
         const SizedBox(height: 16),
-        DelayedDisplay(
-          fadingDuration: Duration(seconds: 1),
-          slidingCurve: Curves.linear,
-          slidingBeginOffset: Offset(10, 0),
-          delay: Duration(milliseconds: 1500),
-          child: FittedBox(
-            alignment: AlignmentDirectional.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: buildContactWidgets(contactList, radius, iconSize),
-            ),
+        FittedBox(
+          alignment: AlignmentDirectional.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: buildContactWidgets(contactList, radius, iconSize),
           ),
-        ),
+        )
+            .animate(delay: 1.seconds)
+            .fadeIn(delay: 1.seconds, duration: 1.seconds),
       ],
     );
   }

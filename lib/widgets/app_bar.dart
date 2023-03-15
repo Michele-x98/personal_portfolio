@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -12,16 +11,8 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth > 600) {
-          // Desktop
-          return DesktopAppBar();
-        } else {
-          // Mobile
-
-          return MobileAppBar();
-        }
-      },
+      builder: (BuildContext context, BoxConstraints constraints) =>
+          constraints.maxWidth > 800 ? DesktopAppBar() : MobileAppBar(),
     );
   }
 }
@@ -72,13 +63,20 @@ class _MobileAppBarState extends State<MobileAppBar>
             height: 40,
             width: value ? MediaQuery.of(context).size.width : 40,
             decoration: BoxDecoration(
-              color: Colors.grey[800],
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 1, 63, 111).withOpacity(0.5),
+                  Colors.grey[900]!,
+                ],
+              ),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  blurRadius: 5,
-                  color: Colors.black45,
-                  spreadRadius: 0,
+                  blurRadius: 30,
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: -10,
                   offset: Offset(5, 5),
                 ),
               ],
@@ -167,13 +165,20 @@ class DesktopAppBar extends StatelessWidget {
             padding: EdgeInsets.only(left: 50, right: 50),
             width: MediaQuery.of(context).size.width * 80,
             decoration: BoxDecoration(
-              color: Colors.grey[800],
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 1, 63, 111).withOpacity(0.5),
+                  Colors.grey[900]!,
+                ],
+              ),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
                   blurRadius: 30,
-                  color: Colors.grey,
-                  spreadRadius: 0,
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: -10,
                   offset: Offset(5, 5),
                 ),
               ],
