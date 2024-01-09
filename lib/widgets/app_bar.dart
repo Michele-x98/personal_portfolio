@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,9 +13,12 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) =>
-          constraints.maxWidth > 800 ? DesktopAppBar() : MobileAppBar(),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0, top: 20),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) =>
+            constraints.maxWidth > 800 ? DesktopAppBar() : MobileAppBar(),
+      ),
     );
   }
 }
@@ -56,88 +62,87 @@ class _MobileAppBarState extends State<MobileAppBar>
             AnimatedOpacity(
           opacity: ref.watch(globalController).currentIndex == 0 ? 0 : 1,
           duration: Duration(seconds: 1),
-          child: AnimatedContainer(
-            duration: Duration(seconds: 1),
-            curve: Curves.easeInOut,
-            margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-            height: 40,
-            width: value ? MediaQuery.of(context).size.width : 40,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 1, 63, 111).withOpacity(0.5),
-                  Colors.grey[900]!,
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 30,
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: -10,
-                  offset: Offset(5, 5),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: ref.watch(globalController).currentIndex != 0
-                      ? () {
-                          isOpen.value = !value;
-                          print(isOpen.value);
-                          value ? controller.forward() : controller.reverse();
-                        }
-                      : null,
-                  icon: AnimatedIcon(
-                    icon: AnimatedIcons.menu_close,
-                    size: 20,
-                    progress: controller,
-                  ),
-                ),
-                value
-                    ? Expanded(
-                        // flex: 10,
-                        child: AnimationLimiter(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: name.length,
-                            itemBuilder: (context, index) =>
-                                AnimationConfiguration.staggeredList(
-                              position: index,
-                              duration: const Duration(milliseconds: 1100),
-                              child: SlideAnimation(
-                                verticalOffset: 0,
-                                // horizontalOffset: 50,
-                                child: FadeInAnimation(
-                                  child: TextButton(
-                                    child: FittedBox(
-                                      child: Text(
-                                        name[index],
-                                        style: GoogleFonts.robotoMono(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                  child: AnimatedContainer(
+                    duration: Duration(seconds: 1),
+                    curve: Curves.easeInOut,
+                    height: 40,
+                    width: value ? MediaQuery.of(context).size.width : 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.lightBlue.withOpacity(0.4),
+                        width: 2,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: AnimationLimiter(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: name.length,
+                              itemBuilder: (context, index) =>
+                                  AnimationConfiguration.staggeredList(
+                                position: index,
+                                duration: 1100.ms,
+                                child: SlideAnimation(
+                                  verticalOffset: 0,
+                                  child: FadeInAnimation(
+                                    child: TextButton(
+                                      child: FittedBox(
+                                        child: Text(
+                                          name[index],
+                                          style: GoogleFonts.robotoMono(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                          ),
                                         ),
                                       ),
+                                      onPressed: () => ref
+                                          .watch(globalController)
+                                          .animateToIndex(index),
                                     ),
-                                    onPressed: () => ref
-                                        .watch(globalController)
-                                        .animateToIndex(index),
                                   ),
                                 ),
                               ),
                             ),
                           ),
+                        )
+                            .animate(
+                              target: value ? 0 : 1,
+                            )
+                            .fadeOut(),
+                        GestureDetector(
+                          onTap: ref.watch(globalController).currentIndex != 0
+                              ? () {
+                                  isOpen.value = !value;
+                                  print(isOpen.value);
+                                  value
+                                      ? controller.forward()
+                                      : controller.reverse();
+                                }
+                              : null,
+                          child: AnimatedIcon(
+                            icon: AnimatedIcons.menu_close,
+                            size: 20,
+                            progress: controller,
+                          ),
                         ),
-                      )
-                    : Container()
-              ],
+                        SizedBox(width: 8)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         ),
@@ -154,108 +159,105 @@ class DesktopAppBar extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         final gx = ref.watch(globalController);
-        return AnimatedContainer(
-          duration: Duration(seconds: 1),
-          curve: Curves.easeIn,
-          height: gx.currentIndex != 0 ? 120 : 0,
-          child: Container(
-            alignment: Alignment.center,
-            height: 70,
-            margin: EdgeInsets.only(left: 50, right: 50, bottom: 50),
-            padding: EdgeInsets.only(left: 50, right: 50),
-            width: MediaQuery.of(context).size.width * 80,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 1, 63, 111).withOpacity(0.5),
-                  Colors.grey[900]!,
-                ],
-              ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: AnimatedContainer(
+            duration: Duration(seconds: 1),
+            curve: Curves.easeIn,
+            height: gx.currentIndex != 0 ? 70 : 0,
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 30,
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: -10,
-                  offset: Offset(5, 5),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TextButton(
-                  child: OnHover(
-                    scale: 1.1,
-                    duration: Duration(milliseconds: 100),
-                    builder: (isHover) => Text(
-                      'HOME',
-                      style: GoogleFonts.robotoMono(
-                        color: isHover ? Colors.lightBlue : Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  width: MediaQuery.of(context).size.width * 80,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.lightBlue.withOpacity(0.4),
+                      width: 2,
                     ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => gx.animateToIndex(0),
-                ),
-                TextButton(
-                  child: OnHover(
-                    scale: 1.1,
-                    duration: Duration(milliseconds: 100),
-                    builder: (isHover) => Text(
-                      'ABOUT',
-                      style: GoogleFonts.robotoMono(
-                        color: isHover ? Colors.lightBlue : Colors.white,
-                        fontWeight: FontWeight.w500,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TextButton(
+                        child: OnHover(
+                          scale: 1.1,
+                          duration: Duration(milliseconds: 100),
+                          builder: (isHover) => Text(
+                            'HOME',
+                            style: GoogleFonts.robotoMono(
+                              color: isHover ? Colors.lightBlue : Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        onPressed: () => gx.animateToIndex(0),
                       ),
-                    ),
-                  ),
-                  onPressed: () => gx.animateToIndex(1),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextButton(
-                    child: OnHover(
-                      scale: 1.1,
-                      duration: Duration(milliseconds: 100),
-                      builder: (isHover) => Text(
-                        'SKILLS',
-                        style: GoogleFonts.robotoMono(
-                          color: isHover ? Colors.lightBlue : Colors.white,
-                          fontWeight: FontWeight.w500,
+                      TextButton(
+                        child: OnHover(
+                          scale: 1.1,
+                          duration: Duration(milliseconds: 100),
+                          builder: (isHover) => Text(
+                            'ABOUT',
+                            style: GoogleFonts.robotoMono(
+                              color: isHover ? Colors.lightBlue : Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        onPressed: () => gx.animateToIndex(1),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextButton(
+                          child: OnHover(
+                            scale: 1.1,
+                            duration: Duration(milliseconds: 100),
+                            builder: (isHover) => Text(
+                              'SKILLS',
+                              style: GoogleFonts.robotoMono(
+                                color:
+                                    isHover ? Colors.lightBlue : Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          onPressed: () => gx.animateToIndex(2),
                         ),
                       ),
-                    ),
-                    onPressed: () => gx.animateToIndex(2),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
-                  child: TextButton(
-                    child: OnHover(
-                      scale: 1.1,
-                      duration: Duration(milliseconds: 100),
-                      builder: (isHover) => Text(
-                        'PROJECTS',
-                        style: GoogleFonts.robotoMono(
-                          color: isHover ? Colors.lightBlue : Colors.white,
-                          fontWeight: FontWeight.w500,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: TextButton(
+                          child: OnHover(
+                            scale: 1.1,
+                            duration: Duration(milliseconds: 100),
+                            builder: (isHover) => Text(
+                              'PROJECTS',
+                              style: GoogleFonts.robotoMono(
+                                color:
+                                    isHover ? Colors.lightBlue : Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          onPressed: () => gx.animateToIndex(3),
                         ),
                       ),
-                    ),
-                    onPressed: () => gx.animateToIndex(3),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12.0, bottom: 12),
+                        child: Image.asset(
+                          'assets/develop.png',
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0, bottom: 12),
-                  child: Image.asset(
-                    'assets/develop.png',
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         );

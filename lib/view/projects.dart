@@ -8,52 +8,64 @@ class Projects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isMobile = context.width < 600;
-    return Column(
+    List<String> project = [
+      'EnjoySalad',
+      'WINii',
+      'Gurfa',
+      'Digital Library',
+      'PrivTAP',
+      'Smart Shopping',
+    ];
+    return Stack(
+      alignment: Alignment.topCenter,
       children: [
-        SizedBox(
-          height: isMobile ? 100 : 200,
-        ),
-        Text(
-          'PROJECTS',
-          style: GoogleFonts.robotoMono(
-            color: Colors.white,
-            fontSize: 25,
-            wordSpacing: 30,
-            letterSpacing: 5,
-            fontWeight: FontWeight.w500,
+        Positioned(
+          top: 120,
+          child: Text(
+            'PROJECTS',
+            style: GoogleFonts.robotoMono(
+              color: Colors.white,
+              fontSize: 25,
+              wordSpacing: 30,
+              letterSpacing: 5,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
-        SizedBox(
-          height: isMobile ? 50 : 100,
-        ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: isMobile ? 40 : 80,
-          children: [
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: SizedBox(
-                height: isMobile ? context.width * 0.8 : 700,
-                width: isMobile ? context.width * 0.8 : 700,
-                child: Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.android_rounded,
+        Positioned(
+          top: isMobile ? 200 : 200,
+          child: SizedBox(
+            height: 200,
+            width: context.width,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: project.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white.withOpacity(0.1),
+                  ),
+                  child: Center(
+                    child: Text(
+                      project[index],
+                      style: GoogleFonts.robotoMono(
+                        color: Colors.white,
+                        fontSize: 20,
+                        wordSpacing: 30,
+                        letterSpacing: 5,
+                        fontWeight: FontWeight.w500,
                       ),
-                    )
-                  ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ],
+          ),
         ),
-        SizedBox(
-          height: 400,
-        )
       ],
     );
   }

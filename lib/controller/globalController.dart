@@ -16,11 +16,18 @@ class GlobalController extends ChangeNotifier {
   final scrollController = new ItemScrollController();
   final itemPositionsListener = new ItemPositionsListener.create();
   var currentIndex = 0;
-  bool _showSkills = false;
+  bool _showSkills = true;
+  bool _loadingDone = false;
 
   bool get showSkills => _showSkills;
   set showSkills(bool value) {
     _showSkills = value;
+    notifyListeners();
+  }
+
+  bool get loadingDone => _loadingDone;
+  set loadingDone(bool value) {
+    _loadingDone = value;
     notifyListeners();
   }
 
@@ -85,26 +92,42 @@ class ContactModel {
     }
     await canLaunchUrlString(link);
   }
-}
 
-List<Widget> buildContactWidgets(
-    List<ContactModel> contacts, double radius, double iconSize) {
-  return contacts
-      .map(
-        (element) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: OnHover(
-            scale: 1.4,
-            builder: (val) => IconButton(
-              icon: Icon(element.icon),
-              iconSize: iconSize,
-              onPressed: element.launchLink,
-              color: val ? Colors.lightBlue : Colors.white,
+  Widget buildContactWidget(
+      BuildContext context, double radius, double iconSize) {
+    return OnHover(
+      scale: 1,
+      builder: (isHover) => GestureDetector(
+        onTap: launchLink,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: isHover ? Color(0xff111E25) : Colors.transparent,
+            border: Border.all(
+              color: Colors.lightBlue.withOpacity(0.4),
+              width: 2,
             ),
+            boxShadow: isHover
+                ? [
+                    BoxShadow(
+                      blurRadius: 50,
+                      color: Colors.lightBlue,
+                      spreadRadius: -20,
+                    )
+                  ]
+                : [],
           ),
+          width: radius,
+          height: radius,
+          child: Icon(icon, size: iconSize, color: Colors.white),
         ),
       )
-      .toList();
+          .animate(
+            target: isHover ? 1 : 0.5,
+          )
+          .moveY(begin: 0, end: -10, curve: Curves.easeIn, duration: 400.ms),
+    );
+  }
 }
 
 class CardSkill extends StatelessWidget {
@@ -127,12 +150,12 @@ class CardSkill extends StatelessWidget {
           width: radius,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            color: Colors.grey.shade200,
+            color: Colors.blue.withOpacity(0.1),
             boxShadow: [
               BoxShadow(
-                blurRadius: 5,
-                color: Colors.white10,
-                spreadRadius: 0,
+                blurRadius: 50,
+                color: Colors.blue.shade900,
+                spreadRadius: -15,
                 offset: Offset(5, 5),
               )
             ],
