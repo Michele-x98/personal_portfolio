@@ -22,7 +22,7 @@ class Projects extends StatelessWidget {
         Positioned(
           top: 120,
           child: Text(
-            'PROJECTS',
+            'PROJECTS (WIP)',
             style: GoogleFonts.robotoMono(
               color: Colors.white,
               fontSize: 25,
