@@ -20,8 +20,8 @@ class Intro extends StatelessWidget {
         children: [
           LayoutBuilder(
             builder: (context, constraints) => ResponsiveIntro(
-              radius: constraints.maxWidth > 600 ? 80 : 80,
-              iconSize: constraints.maxWidth > 600 ? 25 : 25,
+              radius: constraints.maxWidth > 600 ? 80 : 40,
+              iconSize: constraints.maxWidth > 600 ? 25 : 20,
             ),
           ),
           IntroAnimatedArrow()
@@ -38,68 +38,76 @@ class IntroAnimatedArrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) => Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 35.0),
-          child: OnHover(
-            scale: 1,
-            builder: (isHover) => GestureDetector(
-              onTap: () => ref.read(globalController).animateToIndex(1),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 120,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(
-                        color: Colors.lightBlue.withOpacity(0.4),
-                        width: 2,
-                      ),
-                      color: isHover ? Color(0xff111E25) : Colors.transparent,
-                      boxShadow: isHover
-                          ? [
-                              BoxShadow(
-                                blurRadius: 50,
-                                color: Colors.lightBlue,
-                                spreadRadius: -15,
-                              )
-                            ]
-                          : [],
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      size: 30,
-                      color: Colors.lightBlue.withOpacity(0.6),
-                    )
-                        .animate(
-                          onPlay: (controller) => controller.repeat(),
-                        )
-                        .fadeIn()
-                        .slideY(
-                          duration: 1.2.seconds,
-                          curve: Curves.easeOut,
-                          end: 2.5,
-                        )
-                        .fadeOut(
-                          delay: 1.seconds,
-                          duration: 400.ms,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final isMobile = constraints.maxWidth < 600;
+        return Consumer(
+          builder: (BuildContext context, WidgetRef ref, Widget? child) =>
+              Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 35.0),
+              child: OnHover(
+                scale: 1,
+                builder: (isHover) => GestureDetector(
+                  onTap: () => ref.read(globalController).animateToIndex(1),
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: isMobile ? 80 : 120,
+                        width: isMobile ? 30 : 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(
+                            color: Colors.lightBlue.withOpacity(0.4),
+                            width: 2,
+                          ),
+                          color:
+                              isHover ? Color(0xff111E25) : Colors.transparent,
+                          boxShadow: isHover
+                              ? [
+                                  BoxShadow(
+                                    blurRadius: 50,
+                                    color: Colors.lightBlue,
+                                    spreadRadius: -15,
+                                  )
+                                ]
+                              : [],
                         ),
-                  )
-                ],
+                      ),
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          size: 30,
+                          color: Colors.lightBlue.withOpacity(0.6),
+                        )
+                            .animate(
+                              onPlay: (controller) => controller.repeat(),
+                            )
+                            .fadeIn()
+                            .slideY(
+                              duration: 1.2.seconds,
+                              curve: Curves.easeOut,
+                              begin: isMobile ? -0.5 : 0,
+                              end: isMobile ? 1.8 : 2.5,
+                            )
+                            .fadeOut(
+                              delay: 1.seconds,
+                              duration: 400.ms,
+                            ),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    ).animate(delay: 1.seconds).fadeIn(duration: 1.seconds);
+        ).animate(delay: 1.seconds).fadeIn(duration: 1.seconds);
+      },
+    );
   }
 }
 
@@ -148,7 +156,7 @@ class ResponsiveIntro extends StatelessWidget {
               ],
             ),
             textAlign: TextAlign.center,
-            maxLines: 10,
+            maxLines: 4,
             minFontSize: 6,
             maxFontSize: 30,
             overflow: TextOverflow.visible,

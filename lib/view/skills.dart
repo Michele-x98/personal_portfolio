@@ -84,7 +84,7 @@ class _SkillsState extends State<Skills> {
                 // ),
                 LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) =>
-                      constraints.maxWidth > 600
+                      constraints.minWidth > 600
                           ? DesktopSkills()
                           : MobileSkills(),
                 ),
@@ -110,18 +110,19 @@ class DesktopSkills extends ConsumerWidget {
           height: context.height * 0.5,
           alignment: AlignmentDirectional.center,
           child: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 20,
-              runSpacing: 20,
-              children: SkillsEnum.values
-                  .map(
-                    (e) => CardSkill(
-                      e: e,
-                      iconSize: context.width * 0.02,
-                      radius: context.width * 0.05,
-                    ),
-                  )
-                  .toList()),
+            alignment: WrapAlignment.center,
+            spacing: 20,
+            runSpacing: 20,
+            children: SkillsEnum.values
+                .map(
+                  (e) => CardSkill(
+                    e: e,
+                    iconSize: context.width * 0.02,
+                    radius: context.width * 0.05,
+                  ),
+                )
+                .toList(),
+          ),
         ),
         SizedBox(
           width: context.width * 0.07,
@@ -160,7 +161,7 @@ class MobileSkills extends ConsumerWidget {
           height: context.height * 0.4,
           alignment: AlignmentDirectional.center,
           child: AutoSizeText(
-            "Here you can find some of the knowledge gained over the years.\n\n\nThanks to study courses and self-made projects, I was able to hands-on and test various languages ​​and frameworks, as well as different types of databases and CMS.\n\n\nIf you have any questions about any skills you see present, fell free to contact me.",
+            "Here you can find some of the knowledge gained over the years.\n\nThanks to study courses and self-made projects, I was able to hands-on and test various languages and frameworks, as well as different types of databases and CMS.\n\nIf you have any questions about any skills you see present, feel free to contact me.",
             textAlign: TextAlign.center,
             style: GoogleFonts.robotoMono(
               color: Colors.white,
@@ -170,9 +171,7 @@ class MobileSkills extends ConsumerWidget {
             minFontSize: 6,
           ),
         ),
-        SizedBox(
-          width: context.width * 0.07,
-        ),
+        SizedBox(height: 24),
         Container(
           width: context.width * 0.9,
           height: context.height * 0.4,

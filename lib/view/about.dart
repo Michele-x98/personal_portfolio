@@ -1,8 +1,7 @@
 import 'dart:ui';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio/extension.dart';
 
@@ -16,9 +15,10 @@ class AboutMe extends StatelessWidget {
       width: context.width,
       child: Stack(
         alignment: Alignment.topCenter,
+        clipBehavior: Clip.none,
         children: [
           Positioned(
-            top: 150,
+            top: 100,
             child: Text(
               'ABOUT ME',
               style: GoogleFonts.robotoMono(
@@ -31,7 +31,7 @@ class AboutMe extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 300,
+            top: 200,
             child: About(),
           )
         ],
@@ -40,13 +40,14 @@ class AboutMe extends StatelessWidget {
   }
 }
 
-const String text = "👨‍💻 Software Engineer and Mobile Developer in Flutter" +
-    "\n\n\n" +
-    "🎓 MSc in Computer Science and Information System Engineering"
-        "\n\n\n" +
-    "🇮🇹 University of Camerino 🇸🇪 Mälardalen University" +
-    "\n\n\n" +
-    "🔭 Space and Sports Car lover";
+const List<String> texts = [
+  "\n👨‍💻 Software Engineer and Mobile Developer in Flutter",
+  "\n👨‍🎓 BSc in Informatics",
+  "\n🎓 MSc in Computer Science and Information System Engineering",
+  "\n🇮🇹 University of Camerino",
+  "\n🇸🇪 Mälardalen University",
+  "\n🔭 Space and Sports Car lover"
+];
 
 class About extends StatelessWidget {
   const About({Key? key}) : super(key: key);
@@ -56,14 +57,14 @@ class About extends StatelessWidget {
     final width = context.width;
     final height = context.height;
     return Container(
-      height: height * 0.5,
+      height: height * 0.8,
       width: width * 0.9,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           Positioned(
             top: -20,
-            left: -40,
+            left: -100,
             child: Container(
               width: 300,
               height: 300,
@@ -80,7 +81,7 @@ class About extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 0,
+            bottom: -100,
             right: 0,
             child: Transform.rotate(
               angle: 8,
@@ -108,7 +109,6 @@ class About extends StatelessWidget {
                 filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                 child: Container(
                   width: width * 0.8,
-                  height: height * 0.4,
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.1),
                     borderRadius: const BorderRadius.all(Radius.circular(25)),
@@ -119,24 +119,24 @@ class About extends StatelessWidget {
                   ),
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: FittedBox(
-                        child: AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            TypewriterAnimatedText(
-                              text,
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: texts.map((e) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: AutoSizeText(
+                              e,
                               textAlign: TextAlign.center,
-                              textStyle: GoogleFonts.robotoMono(
+                              maxFontSize: 30,
+                              minFontSize: 9,
+                              style: GoogleFonts.robotoMono(
                                 color: Colors.white,
-                                wordSpacing: 3,
-                                letterSpacing: 3,
-                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
                               ),
-                              speed: 30.ms,
                             ),
-                          ],
-                        ),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
