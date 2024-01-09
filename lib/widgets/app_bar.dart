@@ -52,7 +52,7 @@ class _MobileAppBarState extends State<MobileAppBar>
 
   @override
   Widget build(BuildContext context) {
-    List<String> name = ['HOME', 'ABOUT ', 'SKILLS  ', 'PROJECTS'];
+    List<String> name = ['HOME', 'ABOUT '];
 
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) =>
@@ -211,42 +211,42 @@ class DesktopAppBar extends StatelessWidget {
                         ),
                         onPressed: () => gx.animateToIndex(1),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextButton(
-                          child: OnHover(
-                            scale: 1.1,
-                            duration: Duration(milliseconds: 100),
-                            builder: (isHover) => Text(
-                              'SKILLS',
-                              style: GoogleFonts.robotoMono(
-                                color:
-                                    isHover ? Colors.lightBlue : Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          onPressed: () => gx.animateToIndex(2),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12.0),
-                        child: TextButton(
-                          child: OnHover(
-                            scale: 1.1,
-                            duration: Duration(milliseconds: 100),
-                            builder: (isHover) => Text(
-                              'PROJECTS',
-                              style: GoogleFonts.robotoMono(
-                                color:
-                                    isHover ? Colors.lightBlue : Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          onPressed: () => gx.animateToIndex(3),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: TextButton(
+                      //     child: OnHover(
+                      //       scale: 1.1,
+                      //       duration: Duration(milliseconds: 100),
+                      //       builder: (isHover) => Text(
+                      //         'SKILLS',
+                      //         style: GoogleFonts.robotoMono(
+                      //           color:
+                      //               isHover ? Colors.lightBlue : Colors.white,
+                      //           fontWeight: FontWeight.w500,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     onPressed: () => gx.animateToIndex(2),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 12.0),
+                      //   child: TextButton(
+                      //     child: OnHover(
+                      //       scale: 1.1,
+                      //       duration: Duration(milliseconds: 100),
+                      //       builder: (isHover) => Text(
+                      //         'PROJECTS',
+                      //         style: GoogleFonts.robotoMono(
+                      //           color:
+                      //               isHover ? Colors.lightBlue : Colors.white,
+                      //           fontWeight: FontWeight.w500,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     onPressed: () => gx.animateToIndex(3),
+                      //   ),
+                      // ),
                       Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0, bottom: 12),

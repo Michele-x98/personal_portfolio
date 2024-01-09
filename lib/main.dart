@@ -5,8 +5,6 @@ import 'package:personal_portfolio/controller/globalController.dart';
 import 'package:personal_portfolio/view/about.dart';
 import 'package:personal_portfolio/view/intro.dart';
 import 'package:personal_portfolio/view/loading.dart';
-import 'package:personal_portfolio/view/projects.dart';
-import 'package:personal_portfolio/view/skills.dart';
 import 'package:personal_portfolio/widgets/app_bar.dart';
 
 void main() {
@@ -63,8 +61,8 @@ class HomePage extends ConsumerWidget {
               children: [
                 Intro(),
                 AboutMe(),
-                Skills(),
-                Projects(),
+                // Skills(),
+                // Projects(),
               ],
             ),
           ),

@@ -84,7 +84,7 @@ class _SkillsState extends State<Skills> {
                 // ),
                 LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) =>
-                      constraints.minWidth > 600
+                      constraints.maxWidth > 600
                           ? DesktopSkills()
                           : MobileSkills(),
                 ),
@@ -174,9 +174,9 @@ class MobileSkills extends ConsumerWidget {
         SizedBox(height: 24),
         Container(
           width: context.width * 0.9,
-          height: context.height * 0.4,
           alignment: AlignmentDirectional.center,
           child: Wrap(
+            clipBehavior: Clip.none,
             alignment: WrapAlignment.center,
             spacing: 20,
             runSpacing: 20,
