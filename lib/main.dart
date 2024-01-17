@@ -5,6 +5,7 @@ import 'package:personal_portfolio/controller/globalController.dart';
 import 'package:personal_portfolio/view/about.dart';
 import 'package:personal_portfolio/view/intro.dart';
 import 'package:personal_portfolio/view/loading.dart';
+import 'package:personal_portfolio/view/skills.dart';
 import 'package:personal_portfolio/widgets/app_bar.dart';
 
 void main() {
@@ -28,7 +29,6 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(globalController);
-    print(controller.loadingDone);
 
     return Scaffold(
       extendBody: true,
@@ -52,18 +52,19 @@ class HomePage extends ConsumerWidget {
           ),
           Visibility(
             visible: controller.loadingDone,
-            child: PageView(
-              allowImplicitScrolling: true,
-              pageSnapping: false,
+            child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               controller: controller.pageController,
-              onPageChanged: controller.updateIndex,
-              children: [
-                Intro(),
-                AboutMe(),
-                // Skills(),
-                // Projects(),
-              ],
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Intro(),
+                  AboutMe(),
+                  Skills(),
+                  // Projects(),
+                ],
+              ),
             ),
           ),
           Visibility(

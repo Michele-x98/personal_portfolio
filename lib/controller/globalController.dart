@@ -103,10 +103,8 @@ class ContactModel {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: isHover ? Color(0xff111E25) : Colors.transparent,
-            border: Border.all(
-              color: Colors.lightBlue.withOpacity(0.4),
-              width: 2,
-            ),
+            border:
+                Border.all(color: Colors.lightBlue.withOpacity(0.4), width: 2),
             boxShadow: isHover
                 ? [
                     BoxShadow(
@@ -122,9 +120,7 @@ class ContactModel {
           child: Icon(icon, size: iconSize, color: Colors.white),
         ),
       )
-          .animate(
-            target: isHover ? 1 : 0.5,
-          )
+          .animate(target: isHover ? 1 : 0.5)
           .moveY(begin: 0, end: -10, curve: Curves.easeIn, duration: 400.ms),
     );
   }
@@ -175,113 +171,150 @@ enum SkillsEnum {
   flutter(
     color: Colors.blue,
     icon: SimpleIcons.flutter,
+    level: 4.75,
   ),
   firebase(
     color: Colors.orange,
     icon: SimpleIcons.firebase,
+    level: 4.75,
   ),
   dart(
     color: Colors.blue,
     icon: SimpleIcons.dart,
+    level: 4.75,
   ),
-  csharp(
-    color: Colors.purple,
-    icon: SimpleIcons.csharp,
+  next(
+    color: Colors.grey,
+    icon: SimpleIcons.nextdotjs,
+    level: 4,
   ),
-  c(
+  react(
     color: Colors.blue,
-    icon: SimpleIcons.c,
+    icon: SimpleIcons.react,
+    level: 4,
   ),
-  javascript(
-    color: Colors.orange,
-    icon: SimpleIcons.javascript,
-  ),
-  angular(
-    color: Colors.red,
-    icon: SimpleIcons.angular,
+  supabase(
+    color: Colors.green,
+    icon: SimpleIcons.supabase,
+    level: 4,
   ),
   typescript(
     color: Colors.blue,
     icon: SimpleIcons.typescript,
+    level: 4.5,
   ),
-  npm(
-    color: Colors.red,
-    icon: SimpleIcons.npm,
-  ),
-  html5(
+  javascript(
     color: Colors.orange,
-    icon: SimpleIcons.html5,
-  ),
-  css3(
-    color: Colors.blue,
-    icon: SimpleIcons.css3,
-  ),
-  wordpress(
-    color: Colors.blue,
-    icon: SimpleIcons.wordpress,
-  ),
-  woocommerce(
-    color: Colors.pink,
-    icon: SimpleIcons.woocommerce,
-  ),
-  nodedotjs(
-    color: Colors.green,
-    icon: SimpleIcons.nodedotjs,
-  ),
-  springboot(
-    color: Colors.green,
-    icon: SimpleIcons.springboot,
-  ),
-  mongodb(
-    color: Colors.green,
-    icon: SimpleIcons.mongodb,
-  ),
-  mysql(
-    color: Colors.blue,
-    icon: SimpleIcons.mysql,
-  ),
-  git(
-    color: Colors.red,
-    icon: SimpleIcons.git,
-  ),
-  junit5(
-    color: Colors.green,
-    icon: SimpleIcons.junit5,
-  ),
-  vscode(
-    color: Colors.blue,
-    icon: SimpleIcons.visualstudiocode,
-  ),
-  intellijidea(
-    color: Colors.blue,
-    icon: SimpleIcons.intellijidea,
-  ),
-  androidstudio(
-    color: Colors.green,
-    icon: SimpleIcons.androidstudio,
-  ),
-  kafka(
-    color: Colors.red,
-    icon: SimpleIcons.apachekafka,
-  ),
-  docker(
-    color: Colors.blue,
-    icon: SimpleIcons.docker,
+    icon: SimpleIcons.javascript,
+    level: 4,
   ),
   vue(
     color: Colors.green,
     icon: SimpleIcons.vuedotjs,
+    level: 4,
   ),
-  vuetify(
-    color: Colors.green,
-    icon: SimpleIcons.vuetify,
+  c(
+    color: Colors.blue,
+    icon: SimpleIcons.c,
+    level: 3.5,
   ),
-  postman(
+  docker(
+    color: Colors.blue,
+    icon: SimpleIcons.docker,
+    level: 4,
+  ),
+  python(
+    color: Colors.yellow,
+    icon: SimpleIcons.python,
+    level: 3,
+  ),
+  npm(
+    color: Colors.red,
+    icon: SimpleIcons.npm,
+    level: 3.5,
+  ),
+  html5(
     color: Colors.orange,
-    icon: SimpleIcons.postman,
+    icon: SimpleIcons.html5,
+    level: 4,
+  ),
+  css3(
+    color: Colors.blue,
+    icon: SimpleIcons.css3,
+    level: 4,
+  ),
+  shadcn(
+    color: Colors.purple,
+    icon: SimpleIcons.shadcnui,
+    level: 4,
+  ),
+  wordpress(
+    color: Colors.blue,
+    icon: SimpleIcons.wordpress,
+    level: 4,
+  ),
+  woocommerce(
+    color: Colors.pink,
+    icon: SimpleIcons.woocommerce,
+    level: 4,
+  ),
+  figma(
+    color: Colors.orange,
+    icon: SimpleIcons.figma,
+    level: 3.5,
+  ),
+  nodedotjs(
+    color: Colors.green,
+    icon: SimpleIcons.nodedotjs,
+    level: 4,
+  ),
+  springboot(
+    color: Colors.green,
+    icon: SimpleIcons.springboot,
+    level: 4,
+  ),
+  mongodb(
+    color: Colors.green,
+    icon: SimpleIcons.mongodb,
+    level: 4.5,
+  ),
+  mysql(
+    color: Colors.blue,
+    icon: SimpleIcons.mysql,
+    level: 4,
+  ),
+  postgresql(
+    color: Colors.blue,
+    icon: SimpleIcons.postgresql,
+    level: 3.5,
+  ),
+  git(
+    color: Colors.red,
+    icon: SimpleIcons.git,
+    level: 4.5,
+  ),
+  junit5(
+    color: Colors.green,
+    icon: SimpleIcons.junit5,
+    level: 4,
+  ),
+  kafka(
+    color: Colors.red,
+    icon: SimpleIcons.apachekafka,
+    level: 4,
+  ),
+  streamlit(
+    color: Colors.red,
+    icon: SimpleIcons.streamlit,
+    level: 3,
   );
 
-  const SkillsEnum({required this.color, this.icon = SimpleIcons.flutter});
+  const SkillsEnum({
+    required this.color,
+    this.icon = SimpleIcons.flutter,
+    this.level = 1,
+  });
   final MaterialColor color;
   final IconData icon;
+  final double level;
 }

@@ -1,98 +1,130 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flip_card/flip_card.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio/extension.dart';
+import 'package:personal_portfolio/widgets/onHover.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import '../controller/globalController.dart';
 
-class Skills extends StatefulWidget {
+class Skills extends StatelessWidget {
   Skills({Key? key}) : super(key: key);
 
-  @override
-  State<Skills> createState() => _SkillsState();
-}
-
-class _SkillsState extends State<Skills> {
-  final scrollController = ScrollController();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     final double minScrollExtent = scrollController.position.minScrollExtent;
-  //     final double maxScrollExtent = scrollController.position.maxScrollExtent;
-  //     animateToMaxMin(minScrollExtent, maxScrollExtent, minScrollExtent, 15);
-  //   });
-  // }
-
-  // animateToMaxMin(double max, double min, double direction, int sec) async {
-  //   scrollController
-  //       .animateTo(direction, duration: sec.seconds, curve: Curves.linear)
-  //       .then((value) {
-  //     direction = direction == max ? min : max;
-  //     animateToMaxMin(max, min, direction, sec);
-  //   });
-  // }
+  final List<FlipCardController> _isHovered = SkillsEnum.values
+      .getRange(0, 12)
+      .map((e) => FlipCardController())
+      .toList();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: context.width,
-      height: context.height,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          Positioned(
-            top: 150,
-            child: Text(
-              'SKILLS',
-              style: GoogleFonts.robotoMono(
-                color: Colors.white,
-                fontSize: 26,
-                fontWeight: FontWeight.w500,
-                wordSpacing: 10,
-                letterSpacing: 5,
-              ),
+    final isMobile = context.width < 600;
+    return ListView(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(
+        horizontal:
+            context.width > 600 ? context.width * 0.2 : context.width * 0.1,
+        vertical: 200,
+      ),
+      children: [
+        RichText(
+          text: TextSpan(
+            text: 'MY',
+            style: GoogleFonts.robotoMono(
+              color: Colors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+              wordSpacing: 10,
+              letterSpacing: 5,
             ),
+            children: [
+              TextSpan(
+                text: ' SKILLS',
+                style: GoogleFonts.robotoMono(
+                  color: Colors.blue,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700,
+                  wordSpacing: 10,
+                  letterSpacing: 5,
+                ),
+              ),
+            ],
           ),
-          Positioned(
-            top: 300,
-            child: Stack(
-              clipBehavior: Clip.none,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 100),
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: isMobile ? 40 : 100,
+          runSpacing: isMobile ? 40 : 100,
+          children: SkillsEnum.values.getRange(0, 12).map((e) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Positioned(
-                //   top: -250,
-                //   left: -40,
-                //   child: Transform.rotate(
-                //     angle: 8,
-                //     child: Container(
-                //       width: 180,
-                //       height: 180,
-                //       decoration: BoxDecoration(
-                //         shape: BoxShape.circle,
-                //         gradient: LinearGradient(
-                //           colors: [
-                //             Colors.blue.shade900,
-                //             Colors.blue.shade700,
-                //             Colors.blue.shade300,
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) =>
-                      constraints.maxWidth > 600
-                          ? DesktopSkills()
-                          : MobileSkills(),
+                OnHover(
+                  scale: 1,
+                  builder: (isHovered) {
+                    _isHovered[SkillsEnum.values.indexOf(e)].toggleCard();
+                    return FlipCard(
+                      controller: _isHovered[SkillsEnum.values.indexOf(e)],
+                      side: CardSide.FRONT,
+                      front: SleekCircularSlider(
+                        min: 0,
+                        max: 100,
+                        initialValue: (e.level / 5) * 100,
+                        appearance: CircularSliderAppearance(
+                          size: isMobile ? 80 : 120,
+                          angleRange: 360,
+                          startAngle: 270,
+                          infoProperties: InfoProperties(
+                            mainLabelStyle: GoogleFonts.robotoMono(
+                              color: Colors.white,
+                              fontSize: isMobile ? 16 : 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            modifier: (value) {
+                              return '${(e.level / 5 * 100).round()}%';
+                            },
+                          ),
+                          customColors: CustomSliderColors(
+                            trackColor: Colors.grey.shade800.withOpacity(0.5),
+                            progressBarColors: [
+                              e.color,
+                              e.color.shade700,
+                              e.color.shade900,
+                            ],
+                            dotColor: Colors.transparent,
+                          ),
+                          customWidths: CustomSliderWidths(
+                            progressBarWidth: 8,
+                            trackWidth: 4,
+                          ),
+                        ),
+                      ),
+                      back: Icon(
+                        e.icon,
+                        size: isMobile ? 40 : 60,
+                        color: e.color,
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 16),
+                Text(
+                  e.name[0].toUpperCase() + e.name.substring(1),
+                  style: GoogleFonts.robotoMono(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ],
-            ),
-          ),
-        ],
-      ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 }

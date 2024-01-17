@@ -52,7 +52,7 @@ class _MobileAppBarState extends State<MobileAppBar>
 
   @override
   Widget build(BuildContext context) {
-    List<String> name = ['HOME', 'ABOUT '];
+    List<String> name = ['HOME', 'ABOUT', 'SKILLS'];
 
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) =>
@@ -211,24 +211,24 @@ class DesktopAppBar extends StatelessWidget {
                         ),
                         onPressed: () => gx.animateToIndex(1),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: TextButton(
-                      //     child: OnHover(
-                      //       scale: 1.1,
-                      //       duration: Duration(milliseconds: 100),
-                      //       builder: (isHover) => Text(
-                      //         'SKILLS',
-                      //         style: GoogleFonts.robotoMono(
-                      //           color:
-                      //               isHover ? Colors.lightBlue : Colors.white,
-                      //           fontWeight: FontWeight.w500,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     onPressed: () => gx.animateToIndex(2),
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextButton(
+                          child: OnHover(
+                            scale: 1.1,
+                            duration: Duration(milliseconds: 100),
+                            builder: (isHover) => Text(
+                              'SKILLS',
+                              style: GoogleFonts.robotoMono(
+                                color:
+                                    isHover ? Colors.lightBlue : Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          onPressed: () => gx.animateToIndex(2),
+                        ),
+                      ),
                       // Padding(
                       //   padding: const EdgeInsets.only(left: 12.0),
                       //   child: TextButton(
