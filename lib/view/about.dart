@@ -1,3 +1,4 @@
+import 'dart:html' as html;
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -261,7 +262,7 @@ class About extends StatelessWidget {
                         SliderButton(
                           label: Text('DOWNLOAD CV'),
                           icon: Icon(
-                            CupertinoIcons.arrow_right_circle,
+                            Icons.download,
                             size: 30,
                             color: Colors.white,
                           ),
@@ -277,9 +278,22 @@ class About extends StatelessWidget {
                           backgroundColor: Colors.white,
                           action: () {
                             print('Download CV');
+                            final url = 'assets/CV_Benedetti.pdf';
+                            html.AnchorElement anchorElement =
+                                new html.AnchorElement(href: url);
+                            anchorElement.download = url;
+                            anchorElement.click();
                             return Future.value(false);
                           },
                         ),
+                        SizedBox(height: 12),
+                        Text(
+                          '*updated on 17-01-2024',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
+                          ),
+                        )
                       ],
                     ),
                   ),
