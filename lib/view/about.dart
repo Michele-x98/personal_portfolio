@@ -278,7 +278,7 @@ class About extends StatelessWidget {
                           backgroundColor: Colors.white,
                           action: () {
                             print('Download CV');
-                            final url = 'assets/CV_Benedetti.pdf';
+                            final url = 'assets/assets/CV_Benedetti.pdf';
                             html.AnchorElement anchorElement =
                                 new html.AnchorElement(href: url);
                             anchorElement.download = url;
