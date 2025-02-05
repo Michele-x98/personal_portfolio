@@ -103,8 +103,8 @@ class ContactModel {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: isHover ? Color(0xff111E25) : Colors.transparent,
-            border:
-                Border.all(color: Colors.lightBlue.withOpacity(0.4), width: 2),
+            border: Border.all(
+                color: Colors.lightBlue.withValues(alpha: 0.4), width: 2),
             boxShadow: isHover
                 ? [
                     BoxShadow(
@@ -146,7 +146,7 @@ class CardSkill extends StatelessWidget {
           width: radius,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             boxShadow: [
               BoxShadow(
                 blurRadius: 50,

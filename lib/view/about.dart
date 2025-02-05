@@ -68,30 +68,32 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final education = Column(
+      spacing: 20,
       children: [
         ExpEduTile(
           title: 'M.Sc. in Computer Science',
           subtitle: 'UNICAM University',
           where: 'Camerino - IT',
-          from: '2023',
+          from: 'Gen 2021',
+          to: 'Dec 2023',
           description:
               'Master’s degree in Computer Science and Information System Engineering, covering key areas such as Software Engineering, Project Management and Business Process optimization.',
         ),
-        SizedBox(height: 20),
         ExpEduTile(
           title: 'M.Sc. in Computer Science',
           subtitle: 'MDU University',
           where: 'Västerås - SW',
-          from: 'Mar 2022',
+          from: 'Aug 2022',
+          to: 'Feb 2023',
           description:
               'Exchange student for the second year of the master’s degree in Computer Science, competed in the SCORE competition at the ICSE 2023 Conference, during the Distributed Software Development course.',
         ),
-        SizedBox(height: 20),
         ExpEduTile(
           title: 'B.S. in Informatics',
           subtitle: 'UNICAM University',
           where: 'Camerino - IT',
-          from: '2021',
+          from: 'Oct 2021',
+          to: 'Gen 2023',
           description:
               'Bachelor’s degree in Informatics, covering key areas such as Algorithm and Data Structures, Advanced Programming, Database Management, Web and Mobile Applications, and Operating Systems',
         ),
@@ -99,17 +101,35 @@ class About extends StatelessWidget {
     );
 
     final experience = Column(
+      spacing: 20,
       children: [
+        ExpEduTile(
+          title: 'FRONTEND ENGINEER',
+          subtitle: 'POLUS Tech. Ltd',
+          where: 'Switzerland',
+          from: 'May 2024',
+          to: 'PRESENT',
+          description:
+              "Designed and implemented a new map‑centric UI/UX to enhance public safety operations, delivering a user‑friendly and efficient interface.",
+        ),
+        ExpEduTile(
+          title: 'FLUTTER DEVELOPER',
+          subtitle: 'Links Management & Technology SpA ',
+          where: 'REMOTE',
+          from: 'Feb 2024',
+          to: 'Apr 2024',
+          description:
+              "Integrated ”Add to Wallet” feature for a well‑known Italian bank’s App, ensuring seamless integration with Apple and Google Wallet platforms.",
+        ),
         ExpEduTile(
           title: 'FLUTTER DEVELOPER',
           subtitle: 'App&Up s.r.l.',
           where: 'REMOTE',
-          from: '2022',
+          from: 'Mar 2022',
           to: 'PRESENT',
           description:
               "Building a Mobile App using Flutter and Firebase suites for a fintech startup (WINii), that aims to promote financial empowerment.",
         ),
-        SizedBox(height: 20),
         ExpEduTile(
           title: 'WEB DEVELOPER',
           subtitle: 'App&Up s.r.l.',
@@ -119,7 +139,6 @@ class About extends StatelessWidget {
           description:
               'Built a Web CRM for a Rome-based beauty salon startup using Next, React, and Supabase. Implemented the App Route and Server Components pattern in Next.js for improved data load performance and consistency.',
         ),
-        SizedBox(height: 20),
         ExpEduTile(
           title: 'FLUTTER DEVELOPER',
           subtitle: 'EnjoySalad s.r.l.',
@@ -184,10 +203,10 @@ class About extends StatelessWidget {
                 child: Container(
                   width: width * 0.8,
                   decoration: BoxDecoration(
-                    color: Colors.blue.withOpacity(0.1),
+                    color: Colors.blue.withValues(alpha: 0.1),
                     borderRadius: const BorderRadius.all(Radius.circular(25)),
                     border: Border.all(
-                      color: Colors.blue.withOpacity(0.2),
+                      color: Colors.blue.withValues(alpha: 0.2),
                       width: 3,
                     ),
                   ),
@@ -197,13 +216,44 @@ class About extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        LayoutBuilder(builder: (context, con) {
-                          final isMobile = con.maxWidth < 800;
-                          if (isMobile) {
+                        LayoutBuilder(
+                          builder: (context, con) {
+                            final isMobile = con.maxWidth < 800;
+                            if (isMobile) {
+                              return Column(
+                                children: [
+                                  Text(
+                                    'EXPERIENCE',
+                                    style: GoogleFonts.robotoMono(
+                                      color: Colors.white,
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w700,
+                                      wordSpacing: 10,
+                                      letterSpacing: 5,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  experience,
+                                  SizedBox(height: 50),
+                                  Text(
+                                    'EDUCATION',
+                                    style: GoogleFonts.robotoMono(
+                                      color: Colors.white,
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w700,
+                                      wordSpacing: 10,
+                                      letterSpacing: 5,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  education,
+                                ],
+                              );
+                            }
                             return Column(
                               children: [
                                 Text(
-                                  'EXPERIENCE',
+                                  'EXPERIENCE & EDUCATION',
                                   style: GoogleFonts.robotoMono(
                                     color: Colors.white,
                                     fontSize: 26,
@@ -212,52 +262,25 @@ class About extends StatelessWidget {
                                     letterSpacing: 5,
                                   ),
                                 ),
-                                SizedBox(height: 20),
-                                experience,
-                                SizedBox(height: 50),
-                                Text(
-                                  'EDUCATION',
-                                  style: GoogleFonts.robotoMono(
-                                    color: Colors.white,
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.w700,
-                                    wordSpacing: 10,
-                                    letterSpacing: 5,
-                                  ),
+                                const SizedBox(height: 50),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    // Experience
+                                    Expanded(
+                                      child: experience,
+                                    ),
+                                    SizedBox(width: 30),
+                                    Expanded(
+                                      child: education,
+                                    )
+                                  ],
                                 ),
-                                SizedBox(height: 20),
-                                education,
                               ],
                             );
-                          }
-                          return Column(
-                            children: [
-                              Text(
-                                'EXPERIENCE & EDUCATION',
-                                style: GoogleFonts.robotoMono(
-                                  color: Colors.white,
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.w700,
-                                  wordSpacing: 10,
-                                  letterSpacing: 5,
-                                ),
-                              ),
-                              const SizedBox(height: 50),
-                              Row(
-                                children: [
-                                  // Experience
-                                  Expanded(
-                                    child: experience,
-                                  ),
-                                  SizedBox(width: 30),
-                                  Expanded(
-                                    child: education,
-                                  )
-                                ],
-                              ),
-                            ],
-                          );
-                        }),
+                          },
+                        ),
                         SizedBox(height: 50),
                         SliderButton(
                           label: Text('DOWNLOAD CV'),
@@ -269,7 +292,7 @@ class About extends StatelessWidget {
                           width: 220,
                           height: 60,
                           buttonColor:
-                              Colors.lightBlue.shade900.withOpacity(0.9),
+                              Colors.lightBlue.shade900.withValues(alpha: 0.9),
                           boxShadow: BoxShadow(
                             color: Colors.lightBlue.shade900,
                             blurRadius: 40,
@@ -278,7 +301,8 @@ class About extends StatelessWidget {
                           backgroundColor: Colors.white,
                           action: () {
                             print('Download CV');
-                            final url = 'assets/assets/CV_Benedetti.pdf';
+                            final url =
+                                'assets/assets/Michele_Benedetti_resume.pdf';
                             html.AnchorElement anchorElement =
                                 new html.AnchorElement(href: url);
                             anchorElement.download = url;
@@ -288,7 +312,7 @@ class About extends StatelessWidget {
                         ),
                         SizedBox(height: 12),
                         Text(
-                          '*updated on 17-01-2024',
+                          '*updated on 05-01-2025',
                           style: TextStyle(
                             color: Colors.white70,
                             fontSize: 12,
@@ -338,7 +362,7 @@ class ExpEduTile extends StatelessWidget {
                 width: 2,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade700.withOpacity(0.3),
+                  color: Colors.blue.shade700.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
               ),
@@ -363,7 +387,8 @@ class ExpEduTile extends StatelessWidget {
                   Chip(
                     label: Text("$from${to != null ? ' - $to' : ''}",
                         style: TextStyle(fontSize: 12)),
-                    backgroundColor: Colors.lightBlue.shade900.withOpacity(0.6),
+                    backgroundColor:
+                        Colors.lightBlue.shade900.withValues(alpha: 0.6),
                     side: BorderSide.none,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)),

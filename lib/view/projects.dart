@@ -47,7 +47,7 @@ class Projects extends StatelessWidget {
                   width: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                   ),
                   child: Center(
                     child: Text(

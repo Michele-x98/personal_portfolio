@@ -1,23 +1,35 @@
 {
-    "name": "personal_portfolio",
-    "short_name": "personal_portfolio",
+    "name": "Michele Benedetti - Personal Portfolio",
+    "short_name": "Michele Benedetti",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Michele Benedetti - Personal Portfolio",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "icons/Icon-192.png",
+            "src": "icons/develop.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-512.png",
+            "src": "icons/develop.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "icons/develop.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/develop.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ]
 }

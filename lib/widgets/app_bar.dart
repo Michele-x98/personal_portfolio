@@ -77,7 +77,7 @@ class _MobileAppBarState extends State<MobileAppBar>
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                        color: Colors.lightBlue.withOpacity(0.4),
+                        color: Colors.lightBlue.withValues(alpha: 0.4),
                         width: 2,
                       ),
                     ),
@@ -175,7 +175,7 @@ class DesktopAppBar extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 80,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.lightBlue.withOpacity(0.4),
+                      color: Colors.lightBlue.withValues(alpha: 0.4),
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(20),

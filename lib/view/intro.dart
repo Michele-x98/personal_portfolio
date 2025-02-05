@@ -59,7 +59,7 @@ class IntroAnimatedArrow extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           border: Border.all(
-                            color: Colors.lightBlue.withOpacity(0.4),
+                            color: Colors.lightBlue.withValues(alpha: 0.4),
                             width: 2,
                           ),
                           color:
@@ -82,7 +82,7 @@ class IntroAnimatedArrow extends StatelessWidget {
                         child: Icon(
                           Icons.keyboard_arrow_down_rounded,
                           size: 30,
-                          color: Colors.lightBlue.withOpacity(0.6),
+                          color: Colors.lightBlue.withValues(alpha: 0.6),
                         )
                             .animate(
                               onPlay: (controller) => controller.repeat(),

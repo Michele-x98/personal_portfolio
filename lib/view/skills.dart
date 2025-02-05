@@ -90,7 +90,8 @@ class Skills extends StatelessWidget {
                             },
                           ),
                           customColors: CustomSliderColors(
-                            trackColor: Colors.grey.shade800.withOpacity(0.5),
+                            trackColor:
+                                Colors.grey.shade800.withValues(alpha: 0.5),
                             progressBarColors: [
                               e.color,
                               e.color.shade700,
